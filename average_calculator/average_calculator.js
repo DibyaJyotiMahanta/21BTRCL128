@@ -35,13 +35,19 @@ app.get('/numbers/:qualifier', async (req, res) => {
         return res.status(400).json({ error: 'Invalid qualifier' });
     }
 
+ 
     const numbers = await fetchNumbers(qualifier);
 
-    
+
     if (numbers.length === 0) {
         return res.status(500).json({ error: 'Failed to fetch numbers' });
     }
 
+   
+    const windowPrevState = [...window];
+    window = window.concat(numbers).slice(-WINDOW_SIZE);
+
+   
 
     return res.json(response);
 });
