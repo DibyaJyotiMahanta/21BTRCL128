@@ -13,6 +13,8 @@ const Qualifiers = {
 };
 
 let window = [];
+
+
 async function fetchNumbers(qualifier) {
     try {
         const response = await axios.get(`${url}${Qualifiers[qualifier]}`, { timeout: 500 });
@@ -22,6 +24,7 @@ async function fetchNumbers(qualifier) {
         return [];
     }
 }
+
 function calculateAverage(numbers) {
     if (numbers.length === 0) return 0;
     const sum = numbers.reduce((acc, num) => acc + num, 0);
@@ -38,7 +41,7 @@ app.get('/numbers/:qualifier', async (req, res) => {
  
     const numbers = await fetchNumbers(qualifier);
 
-
+ 
     if (numbers.length === 0) {
         return res.status(500).json({ error: 'Failed to fetch numbers' });
     }
@@ -47,16 +50,16 @@ app.get('/numbers/:qualifier', async (req, res) => {
     const windowPrevState = [...window];
     window = window.concat(numbers).slice(-win_size);
 
+ 
+    const avg = calculateAverage(window);
+
+   
     const response = {
         numbers,
         windowPrevState,
         windowCurrState: window,
         avg: avg.toFixed(2)
     };
-
-    const avg = calculateAverage(window);
-
-   
 
     return res.json(response);
 });
