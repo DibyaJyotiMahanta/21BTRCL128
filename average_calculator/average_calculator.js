@@ -22,3 +22,24 @@ async function fetchNumbers(qualifier) {
         return [];
     }
 }
+function calculateAverage(numbers) {
+    if (numbers.length === 0) return 0;
+    const sum = numbers.reduce((acc, num) => acc + num, 0);
+    return sum / numbers.length;
+}
+
+app.get('/numbers/:qualifier', async (req, res) => {
+    const { qualifier } = req.params;
+    
+    if (!QUALIFIERS[qualifier]) {
+        return res.status(400).json({ error: 'Invalid qualifier' });
+    }
+
+    const numbers = await fetchNumbers(qualifier);
+
+    return res.json(response);
+});
+
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
