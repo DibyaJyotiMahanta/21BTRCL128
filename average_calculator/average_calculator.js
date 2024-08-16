@@ -37,6 +37,12 @@ app.get('/numbers/:qualifier', async (req, res) => {
 
     const numbers = await fetchNumbers(qualifier);
 
+    
+    if (numbers.length === 0) {
+        return res.status(500).json({ error: 'Failed to fetch numbers' });
+    }
+
+
     return res.json(response);
 });
 
