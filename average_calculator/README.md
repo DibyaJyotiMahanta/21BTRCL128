@@ -26,10 +26,10 @@ The Average Calculator Microservice is a Node.js application that provides a RES
 
 ## Postman Screenshots
 ![Postman](images/postman.jpg)
-![p](images/p.jpg)
-![f](images/f.jpg)
-![e](images/e.jpg)
-![r](images/r.jpg)
+![p](images/p.png)
+![f](images/f.png)
+![e](images/e.png)
+![r](images/r.png)
 
 
 
