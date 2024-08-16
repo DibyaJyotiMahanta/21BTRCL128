@@ -31,7 +31,7 @@ function calculateAverage(numbers) {
 app.get('/numbers/:qualifier', async (req, res) => {
     const { qualifier } = req.params;
     
-    if (!qualifiers[qualifier]) {
+    if (!Qualifiers[qualifier]) {
         return res.status(400).json({ error: 'Invalid qualifier' });
     }
 
@@ -46,6 +46,15 @@ app.get('/numbers/:qualifier', async (req, res) => {
    
     const windowPrevState = [...window];
     window = window.concat(numbers).slice(-win_size);
+
+    const response = {
+        numbers,
+        windowPrevState,
+        windowCurrState: window,
+        avg: avg.toFixed(2)
+    };
+
+    const avg = calculateAverage(window);
 
    
 
